@@ -12,7 +12,7 @@ namespace Client {
 
             ref Player player = ref playerEntity.Get<Player>();
 
-
+            
         }
     }
 }

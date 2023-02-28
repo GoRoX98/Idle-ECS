@@ -18,3 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2c511b7446f37e341a53a2efd8ba99cd, type: 2}
   - {fileID: 11400000, guid: 3eeae1dcecd6539469720178f7deab5c, type: 2}
   - {fileID: 11400000, guid: 93e8679bf707ffe47b2327a75b352b9b, type: 2}
+  _resetGame: 1
+  _startMoney: 150

@@ -1,4 +1,5 @@
-namespace Client {
+namespace Client 
+{
     public struct BuisnessComponent 
     {
         public Buisness Buisness;

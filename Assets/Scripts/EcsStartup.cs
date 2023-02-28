@@ -21,6 +21,7 @@ namespace Client {
 #endif
 
             _systems
+                .Add(new SavesSystem())
                 .Add(new PlayerInitSystem())
                 .Add(new BuisnessesInitSystem())
                 .Inject(_staticData)

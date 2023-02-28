@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45fe1a10fdf115a4fbf652cb9cb8d5b9, type: 3}
-  m_Name: First
+  m_Name: Fifth
   m_EditorClassIdentifier: 
-  _name: 
-  _buisnessConfiguration:
+  Name: Fourth
+  BuisnessConfiguration:
     RevenueDelay: 0
     BaseCost: 0
     BaseRevenue: 0
-    BaseBuisness: 0
     FirstUpgrade:
       Cost: 0
       RevenueMultiplier: 0
