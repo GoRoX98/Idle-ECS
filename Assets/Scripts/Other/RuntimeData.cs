@@ -1,4 +1,7 @@
-public class RuntimeData
+namespace Client
 {
-
+    public class RuntimeData
+    {
+        
+    }
 }

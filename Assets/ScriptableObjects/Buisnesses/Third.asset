@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fe1a10fdf115a4fbf652cb9cb8d5b9, type: 3}
   m_Name: Third
   m_EditorClassIdentifier: 
-  Name: First
+  Name: Third
   BuisnessConfiguration:
     RevenueDelay: 0
     BaseCost: 0

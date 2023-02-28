@@ -13,4 +13,8 @@ MonoBehaviour:
   m_Name: Static Data
   m_EditorClassIdentifier: 
   _buisnessPrefab: {fileID: 5710455899146872497, guid: 609e8c78afee5494db2ccdddffe086d6, type: 3}
-  _buisnesses: []
+  _buisnesses:
+  - {fileID: 11400000, guid: 618148b61ad464846b312658e1265680, type: 2}
+  - {fileID: 11400000, guid: 2c511b7446f37e341a53a2efd8ba99cd, type: 2}
+  - {fileID: 11400000, guid: 3eeae1dcecd6539469720178f7deab5c, type: 2}
+  - {fileID: 11400000, guid: 93e8679bf707ffe47b2327a75b352b9b, type: 2}
