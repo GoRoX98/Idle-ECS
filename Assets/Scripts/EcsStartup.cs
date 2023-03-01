@@ -23,13 +23,13 @@ namespace Client {
             _systems
                 .Add(new SavesSystem())
                 .Add(new PlayerInitSystem())
-                .Add(new BuisnessesInitSystem())
+                .Add(new BuisnessesSystem())
                 .Inject(_staticData)
                 .Inject(_sceneData)
                 .Init ();
         }
 
-        void Update () {
+        void FixedUpdate () {
             _systems?.Run ();
         }
 

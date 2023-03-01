@@ -1,8 +1,9 @@
 namespace Client 
 {
+    [System.Serializable]
     public struct BuisnessComponent 
     {
-        public Buisness Buisness;
+        public int BuisnessID;
         public float RevenueProgress;
         public int CurrentLVL;
         public bool FirstUpgraded;

@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace Client 
 {
-    sealed class SavesSystem : IEcsInitSystem {
+    sealed class SavesSystem : IEcsInitSystem, IEcsDestroySystem
+    {
         // auto-injected fields.
         private EcsWorld _world;
         private StaticData _staticData;
@@ -27,11 +28,6 @@ namespace Client
                 FirstStart();
             else
                 Load();
-        }
-
-        public void Run()
-        {
-
         }
 
         public void Destroy()
@@ -62,7 +58,7 @@ namespace Client
             bf.Serialize(file, _filterSaveData.Get1(0));
             file.Close();
         }
-        //TODO: buisness list is null
+
         public void Save()
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -80,7 +76,7 @@ namespace Client
                 _filterSaveData.Get1(0).Buisnesses.Add(_filterBuisnesses.Get1(i));
             }
 
-            bf.Serialize(file, _filterSaveData);
+            bf.Serialize(file, _filterSaveData.Get1(0));
             file.Close();
         }
 
