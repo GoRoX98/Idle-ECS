@@ -1,4 +1,5 @@
 using Leopotam.Ecs;
+using Leopotam.Ecs.Ui.Systems;
 using UnityEngine;
 
 namespace Client {
@@ -24,9 +25,13 @@ namespace Client {
                 .Add(new SavesSystem())
                 .Add(new PlayerInitSystem())
                 .Add(new BuisnessesSystem())
+                .Add(new CardEventsSystem())
+                .Add(new UpgradeSystem())
                 .Inject(_staticData)
                 .Inject(_sceneData)
                 .Init ();
+
+            
         }
 
         void FixedUpdate () {

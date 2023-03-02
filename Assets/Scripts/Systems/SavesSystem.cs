@@ -93,7 +93,7 @@ namespace Client
             _filterSaveData.Get1(0) = (SaveComponent)bf.Deserialize(file);
             file.Close();
 
-            _filterPlayer.Get1(0).Money = _filterSaveData.Get1(0).Money;
+            _filterPlayer.Get1(0) = new Player(_filterSaveData.Get1(0).Money);
             foreach (var i in _filterBuisnesses)
             {
                 _filterBuisnesses.Get1(i) = _filterSaveData.Get1(0).Buisnesses[i];

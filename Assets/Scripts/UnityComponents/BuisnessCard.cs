@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class BuisnessCard : MonoBehaviour
 {
+    public int CardID;
     public TextMeshProUGUI BuisnessName;
     public TextMeshProUGUI CurrentLvl;
     public TextMeshProUGUI CurrentIncome;

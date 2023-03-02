@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fe1a10fdf115a4fbf652cb9cb8d5b9, type: 3}
   m_Name: Fourth
   m_EditorClassIdentifier: 
-  Name: Fourth
-  BuisnessConfiguration:
-    RevenueDelay: 0
-    BaseCost: 0
-    BaseRevenue: 0
+  _name: Fourth
+  _iD: 3
+  _buisnessConfiguration:
+    RevenueDelay: 17
+    BaseCost: 1000
+    BaseRevenue: 1000
+    BaseBuisness: 0
     FirstUpgrade:
-      Cost: 0
-      RevenueMultiplier: 0
+      Cost: 15000
+      RevenueMultiplier: 1
     SecondUpgrade:
-      Cost: 0
-      RevenueMultiplier: 0
+      Cost: 50000
+      RevenueMultiplier: 2

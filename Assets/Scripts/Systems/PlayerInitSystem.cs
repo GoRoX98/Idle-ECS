@@ -18,7 +18,7 @@ namespace Client {
             ref Player player = ref playerEntity.Get<Player>();
 
             if (!_filterSave.IsEmpty())
-                player.Money = _filterSave.Get1(0).Money;
+                player = new Player(_filterSave.Get1(0).Money);
 
             _sceneData.BalanceUI.text = "Balance: " + player.Money.ToString() + "$";
         }
@@ -27,7 +27,7 @@ namespace Client {
         {
             if(!_filterIncome.IsEmpty())
             {
-                _filterPlayer.Get1(0).Money += _filterIncome.Get1(0).Money;
+                _filterPlayer.Get1(0).Income(_filterIncome.Get1(0).Money);
                 Debug.Log("New Income: " + _filterIncome.Get1(0).Money);
                 _filterIncome.GetEntity(0).Destroy();
                 UpdateBalance();

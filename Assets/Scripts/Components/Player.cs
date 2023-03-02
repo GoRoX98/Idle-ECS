@@ -1,6 +1,18 @@
-namespace Client {
-    public struct Player 
+namespace Client 
+{
+    public struct Player
     {
-        public int Money;
+        private int _money;
+        public int Money => _money;
+
+        public Player(int startMoney)
+        {
+            _money = startMoney;
+        }
+
+        public void Income(int income)
+        {
+            _money += income;
+        }
     }
 }

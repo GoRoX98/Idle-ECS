@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 5710455899146872500}
   - component: {fileID: 5710455899146872499}
   - component: {fileID: 5710455899146872501}
+  - component: {fileID: 67121119343215087}
   m_Layer: 5
   m_Name: Buisness Card
   m_TagString: Untagged
@@ -342,6 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d43585dfb93b84dbe763d2137aabb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardID: 0
   BuisnessName: {fileID: 5710455898989589783}
   CurrentLvl: {fileID: 5710455899463205272}
   CurrentIncome: {fileID: 5710455899849959991}
@@ -349,6 +351,18 @@ MonoBehaviour:
   LvlUP: {fileID: 5710455899443296387}
   Upgrade1: {fileID: 5710455899537400270}
   Upgrade2: {fileID: 5710455900357357902}
+--- !u!114 &67121119343215087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5710455899146872497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a5f0498b2c64a41ba56f4235d22380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5710455899300351428
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,7 +792,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5710455899443296388}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 67121119343215087}
+        m_TargetAssemblyTypeName: Client.CardEvents, Assembly-CSharp
+        m_MethodName: LvlUP
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5710455899146872501}
+          m_ObjectArgumentAssemblyTypeName: BuisnessCard, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5710455899455884210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,7 +1335,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5710455899537400271}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 67121119343215087}
+        m_TargetAssemblyTypeName: Client.CardEvents, Assembly-CSharp
+        m_MethodName: FirstUpgrade
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5710455899146872501}
+          m_ObjectArgumentAssemblyTypeName: BuisnessCard, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5710455899633081740
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,7 +2084,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5710455900357357903}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 67121119343215087}
+        m_TargetAssemblyTypeName: Client.CardEvents, Assembly-CSharp
+        m_MethodName: SecondUpgrade
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5710455899146872501}
+          m_ObjectArgumentAssemblyTypeName: BuisnessCard, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5710455900617824106
 GameObject:
   m_ObjectHideFlags: 0

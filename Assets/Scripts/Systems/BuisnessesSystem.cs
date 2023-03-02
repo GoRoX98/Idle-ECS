@@ -12,8 +12,8 @@ namespace Client {
         
         private EcsFilter<SaveComponent> _filterSave;
         private EcsFilter<BuisnessComponent> _filterBuisnesses;
-        private EcsFilter<Player> _filterPlayer;
         private EcsFilter<BuisCardComponent> _filterCards;
+        private EcsFilter<UpgradeSuccessComponentFlag> _filterUpgrade;
 
         public void Init()
         {
@@ -35,6 +35,7 @@ namespace Client {
 
                 GameObject buisObj = Object.Instantiate(_staticData.Prefab, _sceneData.BuisnessesPanel.transform);
                 BuisnessCard card = buisObj.GetComponent<BuisnessCard>();
+                card.CardID = bc.BuisnessID;
                 cardComponent.Card = card;
 
                 UpdateBuisnessCard(card, bc);
@@ -46,6 +47,14 @@ namespace Client {
         public void Run()
         {
             RevenueProgress();
+            if(!_filterUpgrade.IsEmpty())
+            {
+                for(int i = 0; i < _filterBuisnesses.GetEntitiesCount(); i++)
+                {
+                    UpdateBuisnessCard(_filterCards.Get1(i).Card, _filterBuisnesses.Get1(i));
+                }
+                _filterUpgrade.GetEntity(0).Destroy();
+            }
         }
 
         #region WorkWithData
@@ -66,21 +75,27 @@ namespace Client {
 
         private void UpdateBuisnessCard(BuisnessCard card, BuisnessComponent buis)
         {
+            BuisnessConfig config = _staticData.Buienesses.Find(match => match.ID == buis.BuisnessID).BuisnessConfiguration;
             card.BuisnessName.text = _staticData.Buienesses.Find(match => match.ID == buis.BuisnessID).Name;
             card.CurrentLvl.text = "LVL\n" + buis.CurrentLVL.ToString();
 
             int income = CalculateIncome(buis);
 
             card.CurrentIncome.text = "Income\n" + income.ToString() + "$";
-            card.LvlUP.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text = "Cost: " + ((buis.CurrentLVL + 1) * _staticData.Buienesses.Find(match => match.ID == buis.BuisnessID).BuisnessConfiguration.BaseCost).ToString();
+            card.LvlUP.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text = "Cost: " + ((buis.CurrentLVL + 1) * config.BaseCost).ToString();
 
             card.RevenueProgress.value = buis.RevenueProgress;
 
-            card.Upgrade1.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text = "Cost: " + _staticData.Buienesses.Find(match => match.ID == buis.BuisnessID).BuisnessConfiguration.FirstUpgrade.Cost;
-            card.Upgrade2.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text = "Cost: " + _staticData.Buienesses.Find(match => match.ID == buis.BuisnessID).BuisnessConfiguration.SecondUpgrade.Cost;
+            card.Upgrade1.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text = "Cost: " + config.FirstUpgrade.Cost;
+            card.Upgrade2.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text = "Cost: " + config.SecondUpgrade.Cost;
             
-            card.Upgrade1.transform.Find("Revenue").GetComponent<TextMeshProUGUI>().text = $"Revenue: +{_staticData.Buienesses.Find(match => match.ID == buis.BuisnessID).BuisnessConfiguration.FirstUpgrade.RevenueMultiplier * 100}%";
-            card.Upgrade2.transform.Find("Revenue").GetComponent<TextMeshProUGUI>().text = $"Revenue: +{_staticData.Buienesses.Find(match => match.ID == buis.BuisnessID).BuisnessConfiguration.SecondUpgrade.RevenueMultiplier * 100}%";
+            card.Upgrade1.transform.Find("Revenue").GetComponent<TextMeshProUGUI>().text = $"Revenue: +{config.FirstUpgrade.RevenueMultiplier * 100}%";
+            card.Upgrade2.transform.Find("Revenue").GetComponent<TextMeshProUGUI>().text = $"Revenue: +{config.SecondUpgrade.RevenueMultiplier * 100}%";
+
+            if (buis.FirstUpgraded)
+                card.Upgrade1.interactable = false;
+            if (buis.SecondUpgraded)
+                card.Upgrade2.interactable = false;
         }
 
         private int CalculateIncome(BuisnessComponent bc)
