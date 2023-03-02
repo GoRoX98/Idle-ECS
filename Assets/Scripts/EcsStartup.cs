@@ -15,7 +15,6 @@ namespace Client {
             
             _world = new EcsWorld ();
             _systems = new EcsSystems (_world);
-            RuntimeData runtimeData = new RuntimeData();
 #if UNITY_EDITOR
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create (_world);
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create (_systems);
