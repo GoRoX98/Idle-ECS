@@ -9,43 +9,24 @@ namespace Client
 
         public void Init()
         {
-            CardEvents.ClickLvlUpgrade += LvlUP;
-            CardEvents.ClickFirstUpgrade += FirstUpgrade;
-            CardEvents.ClickSecondUpgrade += SecondUpgrade;
+            CardEvents.ClickLvlUpgrade += Upgrade;
+            CardEvents.ClickFirstUpgrade += Upgrade;
+            CardEvents.ClickSecondUpgrade += Upgrade;
         }
 
         public void Destroy()
         {
-            CardEvents.ClickLvlUpgrade -= LvlUP;
-            CardEvents.ClickFirstUpgrade -= FirstUpgrade;
-            CardEvents.ClickSecondUpgrade -= SecondUpgrade;
+            CardEvents.ClickLvlUpgrade -= Upgrade;
+            CardEvents.ClickFirstUpgrade -= Upgrade;
+            CardEvents.ClickSecondUpgrade -= Upgrade;
         }
 
-        public void LvlUP(int id)
+        private void Upgrade(int id, EventEnum type)
         {
             EcsEntity upgradeEntity = _world.NewEntity();
             ref UpgradeComponent upgrade = ref upgradeEntity.Get<UpgradeComponent>();
 
-            upgrade = new UpgradeComponent(id, EventEnum.LvlUP);
-            Debug.Log("lvl up");
-        }
-
-        public void FirstUpgrade(int id)
-        {
-            EcsEntity upgradeEntity = _world.NewEntity();
-            ref UpgradeComponent upgrade = ref upgradeEntity.Get<UpgradeComponent>();
-
-            upgrade = new UpgradeComponent(id, EventEnum.FirstUpgrade);
-            Debug.Log("FirstUpgrade");
-        }
-
-        public void SecondUpgrade(int id)
-        {
-            EcsEntity upgradeEntity = _world.NewEntity();
-            ref UpgradeComponent upgrade = ref upgradeEntity.Get<UpgradeComponent>();
-
-            upgrade = new UpgradeComponent(id, EventEnum.SecondUpgrade);
-            Debug.Log("SecondUpgrade");
+            upgrade = new UpgradeComponent(id, type);
         }
 
     }

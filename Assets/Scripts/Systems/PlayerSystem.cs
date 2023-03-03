@@ -2,8 +2,9 @@ using Leopotam.Ecs;
 using UnityEngine;
 
 
-namespace Client {
-    sealed class PlayerInitSystem : IEcsInitSystem, IEcsRunSystem
+namespace Client 
+{
+    sealed class PlayerSystem : IEcsInitSystem, IEcsRunSystem
     {
         private EcsWorld _world;
         private SceneData _sceneData;
@@ -12,7 +13,8 @@ namespace Client {
         private EcsFilter<Player> _filterPlayer;
         private EcsFilter<SaveComponent> _filterSave;
 
-        public void Init () {
+        public void Init () 
+        {
             EcsEntity playerEntity = _world.NewEntity();
 
             ref Player player = ref playerEntity.Get<Player>();

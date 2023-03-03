@@ -22,7 +22,7 @@ namespace Client {
 
             _systems
                 .Add(new SavesSystem())
-                .Add(new PlayerInitSystem())
+                .Add(new PlayerSystem())
                 .Add(new BuisnessesSystem())
                 .Add(new CardEventsSystem())
                 .Add(new UpgradeSystem())

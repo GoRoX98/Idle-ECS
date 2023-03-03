@@ -36,9 +36,9 @@ namespace Client {
                 GameObject buisObj = Object.Instantiate(_staticData.Prefab, _sceneData.BuisnessesPanel.transform);
                 BuisnessCard card = buisObj.GetComponent<BuisnessCard>();
                 card.CardID = bc.BuisnessID;
-                cardComponent.Card = card;
+                CacheCard(card, ref cardComponent);
 
-                UpdateBuisnessCard(card, bc);
+                UpdateBuisnessCard(cardComponent, bc);
 
                 bpanel.sizeDelta += new Vector2(0, cardHeight);
             }
@@ -51,7 +51,7 @@ namespace Client {
             {
                 for(int i = 0; i < _filterBuisnesses.GetEntitiesCount(); i++)
                 {
-                    UpdateBuisnessCard(_filterCards.Get1(i).Card, _filterBuisnesses.Get1(i));
+                    UpdateBuisnessCard(_filterCards.Get1(i), _filterBuisnesses.Get1(i));
                 }
                 _filterUpgrade.GetEntity(0).Destroy();
             }
@@ -73,7 +73,20 @@ namespace Client {
             bc = _filterSave.Get1(0).Buisnesses.Find(match => match.BuisnessID == buisness.ID);
         }
 
-        private void UpdateBuisnessCard(BuisnessCard card, BuisnessComponent buis)
+        private void CacheCard(BuisnessCard card, ref BuisCardComponent buisCC)
+        {
+            buisCC.Card = card;
+            buisCC.BuisnessName = card.BuisnessName;
+            buisCC.CurrentLvl = card.CurrentLvl;
+            buisCC.CurrentIncome = card.CurrentIncome;
+            buisCC.LvlUpCost = card.LvlUP.transform.Find("Cost").GetComponent<TextMeshProUGUI>();
+            buisCC.Upgrade1Cost = card.Upgrade1.transform.Find("Cost").GetComponent<TextMeshProUGUI>();
+            buisCC.Upgrade1Revenue = card.Upgrade1.transform.Find("Revenue").GetComponent<TextMeshProUGUI>();
+            buisCC.Upgrade2Cost = card.Upgrade2.transform.Find("Cost").GetComponent<TextMeshProUGUI>();
+            buisCC.Upgrade2Revenue = card.Upgrade2.transform.Find("Revenue").GetComponent<TextMeshProUGUI>();
+        }
+
+        private void UpdateBuisnessCard(BuisCardComponent card, BuisnessComponent buis)
         {
             BuisnessConfig config = _staticData.Buienesses.Find(match => match.ID == buis.BuisnessID).BuisnessConfiguration;
             card.BuisnessName.text = _staticData.Buienesses.Find(match => match.ID == buis.BuisnessID).Name;
@@ -82,20 +95,20 @@ namespace Client {
             int income = CalculateIncome(buis);
 
             card.CurrentIncome.text = "Income\n" + income.ToString() + "$";
-            card.LvlUP.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text = "Cost: " + ((buis.CurrentLVL + 1) * config.BaseCost).ToString();
+            card.LvlUpCost.text = "Cost: " + ((buis.CurrentLVL + 1) * config.BaseCost).ToString();
 
-            card.RevenueProgress.value = buis.RevenueProgress;
+            card.Card.RevenueProgress.value = buis.RevenueProgress;
 
-            card.Upgrade1.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text = "Cost: " + config.FirstUpgrade.Cost;
-            card.Upgrade2.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text = "Cost: " + config.SecondUpgrade.Cost;
+            card.Upgrade1Cost.text = "Cost: " + config.FirstUpgrade.Cost;
+            card.Upgrade2Cost.text = "Cost: " + config.SecondUpgrade.Cost;
             
-            card.Upgrade1.transform.Find("Revenue").GetComponent<TextMeshProUGUI>().text = $"Revenue: +{config.FirstUpgrade.RevenueMultiplier * 100}%";
-            card.Upgrade2.transform.Find("Revenue").GetComponent<TextMeshProUGUI>().text = $"Revenue: +{config.SecondUpgrade.RevenueMultiplier * 100}%";
+            card.Upgrade1Revenue.text = $"Revenue: +{config.FirstUpgrade.RevenueMultiplier * 100}%";
+            card.Upgrade2Revenue.text = $"Revenue: +{config.SecondUpgrade.RevenueMultiplier * 100}%";
 
             if (buis.FirstUpgraded)
-                card.Upgrade1.interactable = false;
+                card.Card.Upgrade1.interactable = false;
             if (buis.SecondUpgraded)
-                card.Upgrade2.interactable = false;
+                card.Card.Upgrade2.interactable = false;
         }
 
         private int CalculateIncome(BuisnessComponent bc)
