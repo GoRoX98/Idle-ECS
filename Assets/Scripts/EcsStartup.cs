@@ -10,8 +10,8 @@ namespace Client {
         EcsWorld _world;
         EcsSystems _systems;
 
-        void Start () {
-            // void can be switched to IEnumerator for support coroutines.
+        void Start () 
+        {
             
             _world = new EcsWorld ();
             _systems = new EcsSystems (_world);
@@ -35,6 +35,17 @@ namespace Client {
 
         void FixedUpdate () {
             _systems?.Run ();
+        }
+
+        private void OnApplicationQuit()
+        {
+            SavesSystem.OnGameSaveEvent?.Invoke();
+        }
+
+        private void OnApplicationFocus(bool focus)
+        {
+            if(!focus)
+                SavesSystem.OnGameSaveEvent?.Invoke();
         }
 
         void OnDestroy () {

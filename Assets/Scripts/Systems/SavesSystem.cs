@@ -16,6 +16,9 @@ namespace Client
         private EcsFilter<Player> _filterPlayer;
         private EcsFilter<BuisnessComponent> _filterBuisnesses;
 
+        public delegate void GameSaveEvent();
+        public static GameSaveEvent OnGameSaveEvent;
+
 
         #region EcsMethods
 
@@ -28,11 +31,14 @@ namespace Client
                 FirstStart();
             else
                 Load();
+
+            OnGameSaveEvent += Save;
         }
 
         public void Destroy()
         {
-            Save();
+            OnGameSaveEvent?.Invoke();
+            OnGameSaveEvent -= Save;
         }
 
         #endregion
